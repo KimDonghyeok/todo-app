@@ -36,11 +36,11 @@ export default function TodoInput(props) {
           input: {
             fontFamily: "Noto Sans KR",
             fontWeight: 700,
-            fontStyle: "italic",
             "&:focus": {
               border: "1px solid #CED4DA",
             },
             "&::placeholder": {
+              fontStyle: "italic",
               color: "#e6e6e6",
             },
           },
