@@ -1,12 +1,11 @@
 import React from "react";
-import { CSSObject, Paper, Text, Container, Center } from "@mantine/core";
+import { CSSObject, Paper, Container, Center, Title } from "@mantine/core";
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
-import "./css/fonts.css";
 
 const titleStyles: CSSObject = {
-  fontFamily: "Josefin Slab",
-  fontSize: 48,
+  fontFamily: "Noto Sans KR",
+  fontSize: 52,
   fontWeight: 700,
 };
 
@@ -63,11 +62,11 @@ export default function TodoApp() {
 
   return (
     <Container size="sm" py="xl">
-      <Paper p="lg" shadow="md" withBorder radius="lg">
-        <Center>
-          <Text sx={titleStyles} py="md">
-            To-Do List
-          </Text>
+      <Paper p="lg" shadow="md" radius="lg" withBorder>
+        <Center pb="xl">
+          <Title order={1} sx={titleStyles} py="md">
+            todo-app
+          </Title>
         </Center>
         <TodoInput
           input={input}

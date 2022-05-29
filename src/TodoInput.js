@@ -10,8 +10,6 @@ export default function TodoInput(props) {
     <TextInput
       type="text"
       placeholder="What's your To-Do things?"
-      radius="md"
-      size="lg"
       value={input}
       onChange={(event) => {
         handleInput(event.target.value);
@@ -29,8 +27,16 @@ export default function TodoInput(props) {
           <Plus />
         </ActionIcon>
       }
+      radius="md"
+      size="lg"
       pb="md"
       px="md"
+      styles={{
+        input: {
+          fontFamily: "Noto Sans KR",
+          fontWeight: 700,
+        },
+      }}
     />
   );
 }
