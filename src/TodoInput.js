@@ -4,7 +4,7 @@ import { Plus } from "tabler-icons-react";
 import PropTypes from "prop-types";
 
 export default function TodoInput(props) {
-  const { input, handleInput, handleKeyPressed } = props;
+  const { input, handleInput, handleKeyPressed, handleClickPlus } = props;
 
   return (
     <TextInput
@@ -20,7 +20,12 @@ export default function TodoInput(props) {
         handleKeyPressed(event);
       }}
       rightSection={
-        <ActionIcon size="md">
+        <ActionIcon
+          size="md"
+          onClick={(event) => {
+            handleClickPlus(event);
+          }}
+        >
           <Plus />
         </ActionIcon>
       }
@@ -34,4 +39,5 @@ TodoInput.propTypes = {
   input: PropTypes.string.isRequired,
   handleInput: PropTypes.func.isRequired,
   handleKeyPressed: PropTypes.func.isRequired,
+  handleClickPlus: PropTypes.func.isRequired,
 };

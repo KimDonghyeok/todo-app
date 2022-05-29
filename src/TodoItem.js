@@ -23,7 +23,7 @@ export default function TodoItem(props) {
         color="cyan"
         size="md"
       />
-      <Text sx={textStyles} size="xl" weight="500">
+      <Text sx={textStyles} size="xl" weight="700">
         {text}
       </Text>
     </Group>

@@ -37,6 +37,23 @@ export default function TodoApp() {
     }
   };
 
+  const handleClickPlus = (event) => {
+    if (input === "") {
+      return;
+    }
+
+    setTodoList([
+      ...todoList,
+      {
+        isDone: false,
+        text: input,
+      },
+    ]);
+
+    setInput("");
+    console.log(todoList);
+  };
+
   const handleCheckBox = (event, index) => {
     const newTodoList = [...todoList];
     let status = newTodoList[index].isDone;
@@ -56,6 +73,7 @@ export default function TodoApp() {
           input={input}
           handleInput={handleInput}
           handleKeyPressed={handleKeyPressed}
+          handleClickPlus={handleClickPlus}
         />
         <TodoList todos={todoList} handleCheckBox={handleCheckBox} />
       </Paper>
