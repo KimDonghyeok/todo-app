@@ -1,28 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Stack, Checkbox, Text, Group, CSSObject } from "@mantine/core";
+import { Checkbox, Text, Group, CSSObject } from "@mantine/core";
 import "./css/fonts.css";
 
-const textStyles: CSSObject = {
-  fontFamily: "Noto Sans KR",
-};
+export default function TodoItem(props) {
+  const { id, isDone, text, handleCheckBox } = props;
 
-export function TodoItem(props) {
-  const { id, isDone, text } = props;
+  const textStyles: CSSObject = {
+    fontFamily: "Noto Sans KR",
+    textDecoration: isDone ? "line-through" : "",
+    color: isDone ? "lightgrey" : "",
+  };
 
   return (
-    <Stack justify="flex-start" spacing="xl">
-      <Group px="xs" pt="xs">
-        <Checkbox id={id} checked={isDone} color="cyan" size="md" />
-        <Text sx={textStyles} size="lg" weight="500">
-          {text}
-        </Text>
-      </Group>
-    </Stack>
+    <Group pt="sm">
+      <Checkbox
+        id={id}
+        checked={isDone}
+        onChange={(event) => {
+          handleCheckBox(event, id);
+        }}
+        color="cyan"
+        size="md"
+      />
+      <Text sx={textStyles} size="xl" weight="500">
+        {text}
+      </Text>
+    </Group>
   );
 }
-
-export default TodoItem;
 
 TodoItem.propTypes = {
   id: PropTypes.number.isRequired,

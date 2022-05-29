@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  Paper,
-  Text,
-  Container,
-  TextInput,
-  CSSObject,
-  Center,
-} from "@mantine/core";
-import { TodoItem } from "./TodoItem";
+import { CSSObject, Paper, Text, Container, Center } from "@mantine/core";
+import TodoInput from "./TodoInput";
+import TodoList from "./TodoList";
 import "./css/fonts.css";
 
 const titleStyles: CSSObject = {
@@ -16,63 +10,55 @@ const titleStyles: CSSObject = {
   fontWeight: 700,
 };
 
-function TodoApp() {
-  const [inputText, setInputText] = React.useState("");
+export default function TodoApp() {
+  const [input, setInput] = React.useState("");
   const [todoList, setTodoList] = React.useState([]);
-  let id = 0;
+
+  const handleInput = (value) => {
+    setInput(value);
+  };
 
   const handleKeyPressed = (event) => {
-    event.stopPropagation();
-    if (inputText !== "") {
-      if (event.key === "Enter") {
-        setTodoList([
-          ...todoList,
-          { id: id++, text: inputText, isDone: false },
-        ]);
-        setInputText("");
-      }
-    } else {
+    if (input === "") {
       return;
     }
+
+    if (event.key === "Enter") {
+      setTodoList([
+        ...todoList,
+        {
+          isDone: false,
+          text: input,
+        },
+      ]);
+
+      setInput("");
+      console.log(todoList);
+    }
+  };
+
+  const handleCheckBox = (event, index) => {
+    const newTodoList = [...todoList];
+    let status = newTodoList[index].isDone;
+    newTodoList[index].isDone = !status;
+    setTodoList(newTodoList);
   };
 
   return (
     <Container size="sm" py="xl">
-      <Paper shadow="md" withBorder p="lg">
+      <Paper p="lg" shadow="md" withBorder radius="lg">
         <Center>
           <Text sx={titleStyles} py="md">
             To-Do List
           </Text>
         </Center>
-        <Container>
-          <TextInput
-            type="text"
-            placeholder="What's your To-Do things?"
-            radius="md"
-            size="lg"
-            value={inputText}
-            onChange={(event) => {
-              setInputText(event.target.value);
-            }}
-            onKeyDown={handleKeyPressed}
-            pb="md"
-          />
-        </Container>
-        <Container py="md">
-          {todoList.map((item, index) => {
-            return (
-              <TodoItem
-                key={index}
-                id={index}
-                isDone={item.isDone}
-                text={item.text}
-              />
-            );
-          })}
-        </Container>
+        <TodoInput
+          input={input}
+          handleInput={handleInput}
+          handleKeyPressed={handleKeyPressed}
+        />
+        <TodoList todos={todoList} handleCheckBox={handleCheckBox} />
       </Paper>
     </Container>
   );
 }
-
-export default TodoApp;
