@@ -7,6 +7,7 @@ const titleStyles: CSSObject = {
   fontFamily: "Noto Sans KR",
   fontSize: 52,
   fontWeight: 700,
+  color: "#ead7d7",
 };
 
 export default function TodoApp() {
@@ -60,6 +61,12 @@ export default function TodoApp() {
     setTodoList(newTodoList);
   };
 
+  const handleDelete = (event, index) => {
+    const newList = [...todoList];
+    newList.splice(index, 1);
+    setTodoList(newList);
+  };
+
   return (
     <Container size="sm" py="xl">
       <Paper p="lg" shadow="md" radius="lg" withBorder>
@@ -74,7 +81,11 @@ export default function TodoApp() {
           handleKeyPressed={handleKeyPressed}
           handleClickPlus={handleClickPlus}
         />
-        <TodoList todos={todoList} handleCheckBox={handleCheckBox} />
+        <TodoList
+          todos={todoList}
+          handleCheckBox={handleCheckBox}
+          handleDelete={handleDelete}
+        />
       </Paper>
     </Container>
   );

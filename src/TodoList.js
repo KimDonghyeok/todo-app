@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import TodoItem from "./TodoItem";
 
 export default function TodoList(props) {
-  const { todos, handleCheckBox } = props;
+  const { todos, handleCheckBox, handleDelete } = props;
 
   return (
     <Container pb="sm">
@@ -16,6 +16,7 @@ export default function TodoList(props) {
             isDone={todo.isDone}
             text={todo.text}
             handleCheckBox={handleCheckBox}
+            handleDelete={handleDelete}
           />
         );
       })}
@@ -26,4 +27,5 @@ export default function TodoList(props) {
 TodoList.propTypes = {
   todos: PropTypes.array.isRequired,
   handleCheckBox: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
