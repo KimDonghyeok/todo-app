@@ -6,7 +6,7 @@ import TodoItem from "./TodoItem";
 export default function TodoList(props) {
   const { todos, handleCheckBox, handleDelete } = props;
   return (
-    <Stack justify="flex-start" spacing="sm">
+    <Stack justify="flex-start" spacing="xs">
       {todos.map((todo, index) => {
         return (
           <TodoItem

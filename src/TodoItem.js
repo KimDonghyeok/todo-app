@@ -18,7 +18,7 @@ export default function TodoItem(props) {
     fontSize: 18,
     fontWeight: 700,
     textDecoration: isDone ? "line-through" : "",
-    color: isDone ? "lightgrey" : "",
+    color: isDone ? "lightgrey" : "#4d4d4d",
   };
 
   return (
