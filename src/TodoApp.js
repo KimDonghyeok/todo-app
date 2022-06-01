@@ -33,7 +33,6 @@ export default function TodoApp() {
       ]);
 
       setInput("");
-      console.log(todoList);
     }
   };
 
@@ -51,7 +50,6 @@ export default function TodoApp() {
     ]);
 
     setInput("");
-    console.log(todoList);
   };
 
   const handleCheckBox = (event, index) => {
