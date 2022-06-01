@@ -1,13 +1,12 @@
 import React from "react";
-import { Container } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import PropTypes from "prop-types";
 import TodoItem from "./TodoItem";
 
 export default function TodoList(props) {
   const { todos, handleCheckBox, handleDelete } = props;
-
   return (
-    <Container pb="sm">
+    <Stack justify="flex-start" spacing="sm">
       {todos.map((todo, index) => {
         return (
           <TodoItem
@@ -20,7 +19,7 @@ export default function TodoList(props) {
           />
         );
       })}
-    </Container>
+    </Stack>
   );
 }
 

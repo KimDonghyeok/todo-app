@@ -67,24 +67,28 @@ export default function TodoApp() {
 
   return (
     <Container size="sm" py="xl">
-      <Paper p="lg" shadow="md" radius="lg" withBorder>
-        <Center pb="xl">
-          <Title order={1} sx={titleStyles} py="md">
-            todo-app
-          </Title>
-        </Center>
-        <TodoInput
-          input={input}
-          handleInput={handleInput}
-          handleKeyPressed={handleKeyPressed}
-          handleClickPlus={handleClickPlus}
-        />
+      <Container pb="xl">
+        <Paper p="lg" shadow="sm" radius="lg">
+          <Center pb="xl">
+            <Title order={1} sx={titleStyles} py="md">
+              todo-app
+            </Title>
+          </Center>
+          <TodoInput
+            input={input}
+            handleInput={handleInput}
+            handleKeyPressed={handleKeyPressed}
+            handleClickPlus={handleClickPlus}
+          />
+        </Paper>
+      </Container>
+      <Container>
         <TodoList
           todos={todoList}
           handleCheckBox={handleCheckBox}
           handleDelete={handleDelete}
         />
-      </Paper>
+      </Container>
     </Container>
   );
 }
