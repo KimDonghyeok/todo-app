@@ -10,7 +10,7 @@ export default function TodoInput(props) {
     <Paper>
       <TextInput
         type="text"
-        placeholder="What's your To-Do things?"
+        placeholder="What's your to-do things?"
         value={input}
         onChange={(event) => {
           handleInput(event.target.value);
