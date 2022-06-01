@@ -68,7 +68,7 @@ export default function TodoApp() {
   return (
     <Container size="sm" py="xl">
       <Container pb="xl">
-        <Paper p="lg" shadow="sm" radius="lg">
+        <Paper p="lg" shadow="xs" radius="lg">
           <Center pb="xl">
             <Title order={1} sx={titleStyles} py="md">
               todo-app
