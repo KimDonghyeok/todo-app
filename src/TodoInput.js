@@ -28,13 +28,13 @@ export default function TodoInput(props) {
       }
       radius="md"
       size="lg"
-      px="md"
       pb="md"
       styles={{
         input: {
           fontFamily: "Noto Sans KR",
           fontWeight: 700,
           color: "#4d4d4d",
+          paddingLeft: "45px",
           "&:focus": {
             border: "1px solid #CED4DA",
           },
