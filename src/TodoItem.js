@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   Checkbox,
@@ -8,26 +8,37 @@ import {
   Paper,
   Group,
   keyframes,
+  createStyles,
 } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { X } from "tabler-icons-react";
 
 const slideIn = keyframes({
-  "0%": {
-    opacity: 0,
-    transform: "translateY(-100%)",
-  },
-  "100%": {
+  to: {
     opacity: 1,
     transform: "translateY(0)",
   },
 });
 
-const todoItemStyle = (): CSSObject => {
-  return {
-    animation: `${slideIn} .3s cubic-bezier(0, 0, 0.2, 1)`,
-  };
-};
+const slideOut = keyframes({
+  to: {
+    opacity: 0,
+    transform: "translateY(-100%)",
+  },
+});
+
+const useStyles = createStyles(() => ({
+  default: {
+    opacity: 0,
+    transform: "translateY(-100%)",
+  },
+  show: {
+    animation: `${slideIn} .1s ease-in-out`,
+  },
+  remove: {
+    animation: `${slideOut} .1s ease-in-out`,
+  },
+}));
 
 const checkboxStyles = (): CSSObject => {
   return {
@@ -56,9 +67,18 @@ const deleteButtonStyles = (hovered): CSSObject => {
 export default function TodoItem(props) {
   const { id, isDone, text, handleCheckBox, handleDelete } = props;
   const { hovered, ref } = useHover();
+  const { classes } = useStyles();
+  const [itemClass, setItemClass] = useState(classes.default);
+
+  useEffect(() => {
+    setItemClass(classes.show);
+    return () => {
+      setItemClass(classes.remove);
+    };
+  }, [classes.show, classes.remove]);
 
   return (
-    <Paper shadow="xs" radius="lg" ref={ref} sx={todoItemStyle}>
+    <Paper shadow="xs" radius="lg" ref={ref} className={itemClass}>
       <Group p="lg">
         <Checkbox
           id={id}
