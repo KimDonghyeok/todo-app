@@ -3,11 +3,13 @@ import { CSSObject, Paper, Container, Center, Title } from "@mantine/core";
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
 
-const titleStyles: CSSObject = {
-  fontFamily: "Noto Sans KR",
-  fontSize: 52,
-  fontWeight: 700,
-  color: "#ead7d7",
+const titleStyles = (): CSSObject => {
+  return {
+    fontFamily: "Noto Sans KR",
+    fontSize: 52,
+    fontWeight: 700,
+    color: "#ead7d7",
+  };
 };
 
 export default function TodoApp() {

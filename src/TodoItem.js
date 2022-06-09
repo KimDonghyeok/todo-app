@@ -11,11 +11,14 @@ import {
 import { useHover } from "@mantine/hooks";
 import { X } from "tabler-icons-react";
 
-export default function TodoItem(props) {
-  const { id, isDone, text, handleCheckBox, handleDelete } = props;
-  const { hovered, ref } = useHover();
+const checkboxStyles = (): CSSObject => {
+  return {
+    flex: 5,
+  };
+};
 
-  const textStyles: CSSObject = {
+const textStyles = (isDone): CSSObject => {
+  return {
     fontFamily: "Noto Sans KR",
     fontSize: 18,
     fontWeight: 700,
@@ -23,6 +26,18 @@ export default function TodoItem(props) {
     color: isDone ? "lightgrey" : "#4d4d4d",
     flex: 90,
   };
+};
+
+const deleteButtonStyles = (hovered): CSSObject => {
+  return {
+    flex: 5,
+    visibility: hovered ? "visible" : "hidden",
+  };
+};
+
+export default function TodoItem(props) {
+  const { id, isDone, text, handleCheckBox, handleDelete } = props;
+  const { hovered, ref } = useHover();
 
   return (
     <Paper shadow="xs" radius="lg" ref={ref}>
@@ -36,19 +51,14 @@ export default function TodoItem(props) {
           color="teal"
           size="md"
           radius="xl"
-          style={{
-            flex: 5,
-          }}
+          sx={checkboxStyles}
         />
-        <Text sx={textStyles}>{text}</Text>
+        <Text sx={textStyles(isDone)}>{text}</Text>
         <ActionIcon
           onClick={(event) => {
             handleDelete(event, id);
           }}
-          style={{
-            flex: 5,
-            visibility: hovered ? "visible" : "hidden",
-          }}
+          sx={deleteButtonStyles(hovered)}
           radius="xl"
         >
           <X color="lightgrey" strokeWidth={3} />
