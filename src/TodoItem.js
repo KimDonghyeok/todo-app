@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   Checkbox,
@@ -14,6 +14,10 @@ import { useHover } from "@mantine/hooks";
 import { X } from "tabler-icons-react";
 
 const slideIn = keyframes({
+  from: {
+    opacity: 0,
+    transform: "translateY(-100%)",
+  },
   to: {
     opacity: 1,
     transform: "translateY(0)",
@@ -21,6 +25,10 @@ const slideIn = keyframes({
 });
 
 const slideOut = keyframes({
+  from: {
+    opacity: 1,
+    transform: "translateY(0)",
+  },
   to: {
     opacity: 0,
     transform: "translateY(-100%)",
@@ -33,10 +41,10 @@ const useStyles = createStyles(() => ({
     transform: "translateY(-100%)",
   },
   show: {
-    animation: `${slideIn} .1s ease-in-out`,
+    animation: `${slideIn} .2s ease-in-out`,
   },
   remove: {
-    animation: `${slideOut} .1s ease-in-out`,
+    animation: `${slideOut} .2s ease-in-out`,
   },
 }));
 
@@ -70,12 +78,9 @@ export default function TodoItem(props) {
   const { classes } = useStyles();
   const [itemClass, setItemClass] = useState(classes.default);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setItemClass(classes.show);
-    return () => {
-      setItemClass(classes.remove);
-    };
-  }, [classes.show, classes.remove]);
+  }, [classes]);
 
   return (
     <Paper shadow="xs" radius="lg" ref={ref} className={itemClass}>
