@@ -7,9 +7,27 @@ import {
   ActionIcon,
   Paper,
   Group,
+  keyframes,
 } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { X } from "tabler-icons-react";
+
+const slideIn = keyframes({
+  "0%": {
+    opacity: 0,
+    transform: "translateY(-100%)",
+  },
+  "100%": {
+    opacity: 1,
+    transform: "translateY(0)",
+  },
+});
+
+const todoItemStyle = (): CSSObject => {
+  return {
+    animation: `${slideIn} .3s cubic-bezier(0, 0, 0.2, 1)`,
+  };
+};
 
 const checkboxStyles = (): CSSObject => {
   return {
@@ -40,7 +58,7 @@ export default function TodoItem(props) {
   const { hovered, ref } = useHover();
 
   return (
-    <Paper shadow="xs" radius="lg" ref={ref}>
+    <Paper shadow="xs" radius="lg" ref={ref} sx={todoItemStyle}>
       <Group p="lg">
         <Checkbox
           id={id}
