@@ -51,7 +51,7 @@ export default function TodoItem(props) {
           }}
           radius="xl"
         >
-          <X color="lightgrey" strokeWidth={3} size="lg" />
+          <X color="lightgrey" strokeWidth={3} />
         </ActionIcon>
       </Group>
     </Paper>
