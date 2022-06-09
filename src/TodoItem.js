@@ -33,8 +33,8 @@ export default function TodoItem(props) {
           onChange={(event) => {
             handleCheckBox(event, id);
           }}
-          color="cyan"
-          size="lg"
+          color="teal"
+          size="md"
           radius="xl"
           style={{
             flex: 5,
@@ -49,8 +49,9 @@ export default function TodoItem(props) {
             flex: 5,
             visibility: hovered ? "visible" : "hidden",
           }}
+          radius="xl"
         >
-          <X color="lightgrey" strokeWidth={3} />
+          <X color="lightgrey" strokeWidth={3} size="lg" />
         </ActionIcon>
       </Group>
     </Paper>

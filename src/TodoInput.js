@@ -22,8 +22,9 @@ export default function TodoInput(props) {
           onClick={(event) => {
             handleClickPlus(event);
           }}
+          radius="xl"
         >
-          <Plus />
+          <Plus color="grey" strokeWidth={3} />
         </ActionIcon>
       }
       radius="md"
