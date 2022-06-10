@@ -1,5 +1,6 @@
 import React from "react";
 import { CSSObject, Paper, Container, Center, Title } from "@mantine/core";
+import { v4 as uuidv4 } from "uuid";
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
 
@@ -27,6 +28,7 @@ export default function TodoApp() {
     setTodoList([
       ...todoList,
       {
+        id: uuidv4(),
         isDone: false,
         text: input,
       },

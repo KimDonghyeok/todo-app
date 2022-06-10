@@ -13,7 +13,7 @@ export default function TodoList(props) {
         todos.map((todo, index) => {
           return (
             <TodoItem
-              key={index}
+              key={todo.id}
               id={index}
               isDone={todo.isDone}
               text={todo.text}
