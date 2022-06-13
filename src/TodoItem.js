@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   Checkbox,
@@ -41,10 +41,10 @@ const useStyles = createStyles(() => ({
     transform: "translateY(-100%)",
   },
   show: {
-    animation: `${slideIn} .2s ease-in-out`,
+    animation: `${slideIn} .2s ease-in`,
   },
   remove: {
-    animation: `${slideOut} .2s ease-in-out`,
+    animation: `${slideOut} .2s ease-out`,
   },
 }));
 
@@ -78,9 +78,9 @@ export default function TodoItem(props) {
   const { classes } = useStyles();
   const [itemClass, setItemClass] = useState(classes.default);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setItemClass(classes.show);
-  }, [classes]);
+  }, [classes.show]);
 
   return (
     <Paper shadow="xs" radius="lg" ref={ref} className={itemClass}>
@@ -99,7 +99,10 @@ export default function TodoItem(props) {
         <Text sx={textStyles(isDone)}>{text}</Text>
         <ActionIcon
           onClick={(event) => {
-            handleDelete(event, id);
+            setItemClass(classes.remove);
+            setTimeout(() => {
+              handleDelete(event, id);
+            }, 200);
           }}
           sx={deleteButtonStyles(hovered)}
           radius="xl"
