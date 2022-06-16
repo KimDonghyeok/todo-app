@@ -7,44 +7,21 @@ import {
   ActionIcon,
   Paper,
   Group,
-  keyframes,
   createStyles,
 } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { X } from "tabler-icons-react";
 
-const slideIn = keyframes({
-  from: {
-    opacity: 0,
-    transform: "translateY(-100%)",
-  },
-  to: {
-    opacity: 1,
-    transform: "translateY(0)",
-  },
-});
-
-const slideOut = keyframes({
-  from: {
-    opacity: 1,
-    transform: "translateY(0)",
-  },
-  to: {
-    opacity: 0,
-    transform: "translateY(-100%)",
-  },
-});
-
 const useStyles = createStyles(() => ({
   default: {
     opacity: 0,
     transform: "translateY(-100%)",
+    transition: "all 0.2s linear",
   },
-  show: {
-    animation: `${slideIn} .2s ease-in`,
-  },
-  remove: {
-    animation: `${slideOut} .2s ease-out`,
+  slide: {
+    opacity: 1,
+    transform: "translateY(0%)",
+    transition: "all 0.2s linear",
   },
 }));
 
@@ -79,8 +56,8 @@ export default function TodoItem(props) {
   const [itemClass, setItemClass] = useState(classes.default);
 
   useEffect(() => {
-    setItemClass(classes.show);
-  }, [classes.show]);
+    setItemClass(classes.slide);
+  }, [classes.slide]);
 
   return (
     <Paper shadow="xs" radius="lg" ref={ref} className={itemClass}>
@@ -99,7 +76,7 @@ export default function TodoItem(props) {
         <Text sx={textStyles(isDone)}>{text}</Text>
         <ActionIcon
           onClick={(event) => {
-            setItemClass(classes.remove);
+            setItemClass(classes.default);
             setTimeout(() => {
               handleDelete(event, id);
             }, 200);
