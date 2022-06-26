@@ -59,6 +59,13 @@ export default function TodoItem(props) {
     setItemClass(classes.slide);
   }, [classes.slide]);
 
+  const handleClickDelete = (event) => {
+    setItemClass(classes.default);
+    setTimeout(() => {
+      handleDelete(event, id);
+    }, 200);
+  };
+
   return (
     <Paper shadow="xs" radius="lg" ref={ref} className={itemClass}>
       <Group p="lg">
@@ -75,12 +82,7 @@ export default function TodoItem(props) {
         />
         <Text sx={textStyles(isDone)}>{text}</Text>
         <ActionIcon
-          onClick={(event) => {
-            setItemClass(classes.default);
-            setTimeout(() => {
-              handleDelete(event, id);
-            }, 200);
-          }}
+          onClick={(event) => handleClickDelete(event)}
           sx={deleteButtonStyles(hovered)}
           radius="xl"
         >
