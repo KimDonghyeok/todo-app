@@ -62,8 +62,12 @@ export default function TodoItem(props) {
   const handleClickDelete = (event) => {
     setItemClass(classes.default);
     setTimeout(() => {
-      handleDelete(event, id);
+      handleDelete(id);
     }, 200);
+  };
+
+  const handleClickCheckBox = (event) => {
+    handleCheckBox(id);
   };
 
   return (
@@ -72,9 +76,7 @@ export default function TodoItem(props) {
         <Checkbox
           id={id}
           checked={isDone}
-          onChange={(event) => {
-            handleCheckBox(event, id);
-          }}
+          onChange={handleClickCheckBox}
           color="teal"
           size="md"
           radius="xl"
@@ -82,7 +84,7 @@ export default function TodoItem(props) {
         />
         <Text sx={textStyles(isDone)}>{text}</Text>
         <ActionIcon
-          onClick={(event) => handleClickDelete(event)}
+          onClick={handleClickDelete}
           sx={deleteButtonStyles(hovered)}
           radius="xl"
         >
