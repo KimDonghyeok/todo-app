@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { CSSObject, Paper, Container, Center, Title } from "@mantine/core";
 import { v4 as uuidv4 } from "uuid";
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
+import {
+  getLocalStorageTodo,
+  setLocalStorageTodo,
+} from "./LocalStorageController";
 
 const titleStyles = (): CSSObject => {
   return {
@@ -16,6 +20,23 @@ const titleStyles = (): CSSObject => {
 export default function TodoApp() {
   const [input, setInput] = React.useState("");
   const [todoList, setTodoList] = React.useState([]);
+
+  // useRef hook을 사용하여 todo-app의 마운트 상태에 대한 값을 지정
+  const mounted = useRef(false);
+
+  // useEffecy hook을 사용하여 LocalStorage에 저장된 todoList를 로드, 저장
+  useEffect(() => {
+    // useRef hook으로 반환된 mounted.current 값에 따라서 LocalStorage의 데이터 조작
+    // mounted.current = false -> 최초 마운트이므로 mounted.current = true로 변경 후 LocalStorage에서 todoList 데이터 로드
+    // mounted.current = true -> 이미 마운트 된 상태이므로 todoList의 변경이 있을 때마다 LocalStorage에 todoList 데이터 저장
+    if (!mounted.current) {
+      mounted.current = true;
+      const newList = getLocalStorageTodo();
+      setTodoList(newList);
+    } else {
+      setLocalStorageTodo(todoList);
+    }
+  }, [todoList]);
 
   // todo input의 입력 값 바뀌었을 때 이벤트 처리
   const handleInput = (value) => {
@@ -62,7 +83,7 @@ export default function TodoApp() {
   };
 
   // 체크박스 클릭시 이벤트 처리, 해당 todoItem의 index로 todoList에서 탐색하여 isDone 값 변경
-  const handleCheckBox = (event, index) => {
+  const handleCheckBox = (index) => {
     const newTodoList = [...todoList];
     let status = newTodoList[index].isDone;
     newTodoList[index].isDone = !status;
@@ -70,10 +91,14 @@ export default function TodoApp() {
   };
 
   // 삭제버튼 클릭 시 이벤트 처리, 해당 todoItem의 index로 todoList에서 Array.splice 메소드로 해당 todo object 삭제
-  const handleDelete = (event, index) => {
+  const handleDelete = (index) => {
     const newList = [...todoList];
     newList.splice(index, 1);
     setTodoList(newList);
+  };
+
+  const handleLocalStorage = (newList) => {
+    setLocalStorageTodo(newList);
   };
 
   return (
@@ -98,6 +123,7 @@ export default function TodoApp() {
           todos={todoList}
           handleCheckBox={handleCheckBox}
           handleDelete={handleDelete}
+          handleLocalStorage={handleLocalStorage}
         />
       </Container>
     </Container>

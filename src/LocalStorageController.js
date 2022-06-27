@@ -5,7 +5,7 @@ const setLocalStorageTodo = (todoList) => {
 
 const getLocalStorageTodo = () => {
   const data = localStorage.getItem("kimdonghyeok.todoapps");
-  const todoList = JSON.parse(data);
+  const todoList = JSON.parse(data) || [];
   return todoList;
 };
 
