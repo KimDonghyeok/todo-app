@@ -24,7 +24,7 @@ export default function TodoApp() {
   // useRef hook을 사용하여 todo-app의 마운트 상태에 대한 값을 지정
   const mounted = useRef(false);
 
-  // useEffecy hook을 사용하여 LocalStorage에 저장된 todoList를 로드, 저장
+  // useEffect hook을 사용하여 LocalStorage에 저장된 todoList를 로드, 저장
   useEffect(() => {
     // useRef hook으로 반환된 mounted.current 값에 따라서 LocalStorage의 데이터 조작
     // mounted.current = false -> 최초 마운트이므로 mounted.current = true로 변경 후 LocalStorage에서 todoList 데이터 로드
