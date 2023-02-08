@@ -1,12 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { CSSObject, Paper, Container, Center, Title } from "@mantine/core";
-import { v4 as uuidv4 } from "uuid";
-import TodoInput from "./TodoInput";
-import TodoList from "./TodoList";
 import {
   getLocalStorageTodo,
   setLocalStorageTodo,
-} from "./LocalStorageController";
+} from "./Controller/LocalStorageController";
 
 const titleStyles = (): CSSObject => {
   return {
@@ -38,12 +34,12 @@ export default function TodoApp() {
     }
   }, [todoList]);
 
-  // todo input의 입력 값 바뀌었을 때 이벤트 처리
+  // input의 입력 값 바뀌었을 때 이벤트 처리
   const handleInput = (value) => {
     setInput(value);
   };
 
-  // todo 생성
+  // todo 데이터 생성
   const createTodo = () => {
     // 현재 "input" 값으로  todo object 생성, todoList에 삽입
     setTodoList([
